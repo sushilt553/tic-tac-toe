@@ -22,4 +22,6 @@ const winningConditions = [
     [2, 4, 5]
 ]
 
-const switchPlayer
+const switchPlayer = () => {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+}
