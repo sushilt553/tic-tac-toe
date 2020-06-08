@@ -14,7 +14,8 @@ const currentPlayerTurn = () => {
     return `It's ${currentPlayer}'s turn.`
 }
 
-const state = ["", "", "", "", "", "", "", "", ""]
+statusDisplay.innerHTML = currentPlayerTurn();
+let state = ["", "", "", "", "", "", "", "", ""]
 
 const winningConditions = [
     [0, 1, 2],
@@ -72,3 +73,12 @@ const checkResult = () => {
     switchPlayer();
 }
 
+const restartGame = () => {
+    state = ["", "", "", "", "", "", "", "", ""];
+    currentPlayer = "X";
+    statusDisplay.innerHTML = currentPlayerTurn();
+    document.querySelectorAll(".cell").forEach((cell) => cell.innerHTML = "");
+}
+
+document.querySelectorAll(".cell").forEach((cell) => cell.addEventListener("click", handleClickedCell));
+document.querySelector(".restart-button").addEventListener("click", restartGame);
