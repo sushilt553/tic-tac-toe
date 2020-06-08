@@ -22,4 +22,4 @@ const winningConditions = [
     [2, 4, 5]
 ]
 
-const 
+const switchPlayer
