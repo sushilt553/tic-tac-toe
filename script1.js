@@ -1,5 +1,6 @@
+let statusDisplay = document.querySelector(".game-status-display");
+
 let currentPlayer = "X";
-let statusDisplay = `It's ${currentPlayer}'s turn`;
 
 const winningMessage = () => {
     statusDisplay = `Congrats, ${currentPlayer} won the game.`
@@ -7,6 +8,10 @@ const winningMessage = () => {
 
 const drawMessage = () => {
     statusDisplay = `The game is draw.`
+}
+
+const currentPlayerTurn = () => {
+    return `It's ${currentPlayer}'s turn.`
 }
 
 const state = ["", "", "", "", "", "", "", "", ""]
@@ -24,4 +29,15 @@ const winningConditions = [
 
 const switchPlayer = () => {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerHTML = currentPlayerTurn();
+}
+
+const handleClickedCell = (e) => {
+    let clickedCell = e.target;
+    let clickedIndex = parseInt(clickedCell.getAttribute("data-cell-index"));
+
+    if (state[clickedIndex] !== "") return;
+
+    state[clickedIndex] = currentPlayer;
+    clickedCell.innerHTML = currentPlayer;
 }
