@@ -1,5 +1,6 @@
 let statusDisplay = document.querySelector(".game-status-display");
 
+let gameActive = true;
 let currentPlayer = "X";
 
 const winningMessage = () => {
@@ -37,7 +38,7 @@ const handleClickedCell = (e) => {
     let clickedCell = e.target;
     let clickedIndex = parseInt(clickedCell.getAttribute("data-cell-index"));
 
-    if (state[clickedIndex] !== "") return;
+    if (state[clickedIndex] !== "" || !gameActive) return;
 
     state[clickedIndex] = currentPlayer;
     clickedCell.innerHTML = currentPlayer;
@@ -62,11 +63,13 @@ const checkResult = () => {
 
     if (roundWon) {
         statusDisplay.innerHTML = winningMessage();
+        gameActive = false;
         return;
     }
 
     if (!state.includes("")) {
         statusDisplay.innerHTML = drawMessage();
+        gameActive = false;
         return;
     }
 
@@ -74,6 +77,7 @@ const checkResult = () => {
 }
 
 const restartGame = () => {
+    gameActive = true;
     state = ["", "", "", "", "", "", "", "", ""];
     currentPlayer = "X";
     statusDisplay.innerHTML = currentPlayerTurn();
